@@ -62,7 +62,6 @@ author:
     - label: "Website"
       icon: "fas fa-fw fa-link"
       url: "https://"
-    - label: "Twitter"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/heretate/"
@@ -93,11 +92,11 @@ defaults:
       layout: single
       author_profile: true
 
-category_archive:
+project_archive:
   type: liquid
-  path: /categories/
-tag_archive:
+  path: /projects/
+resume:
   type: liquid
-  path: /tags/
+  path: /resume/
 
 theme: jekyll-theme-cayman
