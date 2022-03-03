@@ -13,7 +13,7 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Eric's Blog
+title: <>
 email: yxhuan@uwaterloo.ca
 description: >- # this means to ignore newlines until "baseurl:"
   Yolo :)
@@ -56,21 +56,31 @@ plugins:
 
 author:
   name   : "Eric Huan"
-  avatar : "/assets/images/bio-photo.jpg"
   bio    : "In search of motivation."
   links:
-    - label: "Website"
-      icon: "fas fa-fw fa-link"
-      url: "https://"
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope"
+      url: "mailto:yxhuan@uwaterloo.ca"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/heretate/"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/eric-huan-372841117/"
+    
+    
 
 footer:
   links:
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope"
+      url: "mailto:yxhuan@uwaterloo.ca"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/"
+      url: "https://github.com/heretate/"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/eric-huan-372841117/"
 
 defaults:
   # _posts
@@ -91,12 +101,5 @@ defaults:
     values:
       layout: single
       author_profile: true
-
-project_archive:
-  type: liquid
-  path: /projects/
-resume:
-  type: liquid
-  path: /resume/
 
 theme: jekyll-theme-cayman
