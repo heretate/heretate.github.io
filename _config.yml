@@ -55,7 +55,7 @@ plugins:
   - jekyll-include-cache
 
 author:
-  bio    : "In search of motivation."
+  bio    : "How do I get this thing working?"
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope"
