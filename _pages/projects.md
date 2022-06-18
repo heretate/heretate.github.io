@@ -11,4 +11,4 @@ author_profile: true
 
 ## Flow-Based Process Scheduler - Python
 
-[<img alt="[https://github.com/heretate/FBPScheduler]" width="700px" height="400px" src="../assets/images/flow-based-chart.png" />](https://github.com/heretate/FBPScheduler/)
+[<img alt="[https://github.com/heretate/FBPScheduler]" width="700px" height="400px" src="../assets/images/flow-based-chart.PNG" />](https://github.com/heretate/FBPScheduler/)
