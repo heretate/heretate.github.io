@@ -1,0 +1,137 @@
+:root {
+    --bg-color: rgba(150, 150, 150, 1);
+  
+    /* Border Colors are all transparent colors. These will tint or shade the background color of the square. */
+    --border-left-color: rgba(255, 255, 255, 0.20);
+    --border-top-color: rgba(255, 255, 255, 0.33);
+    --border-right-color: rgba(0, 0, 0, 0.15);
+    --border-bottom-color: rgba(0, 0, 0, 0.5);
+  
+    /* Square Colors:  background colors for the squares.*/
+    --default: #FFFAFA;
+    --node: #000000;
+    --wall: #808080;
+    --left-shortest: #FF69B4;
+    --right-shortest: #f2ea00;
+    --both-shortest: #FFAC1C;
+    --left-visited: rgb(171, 171, 241);
+    --right-visited: rgb(73, 245, 73);
+    --both-visited: #AFEEEE;
+  
+    /* Numbers define values that will be used throughout the CSS.
+    --tile-size: 20px for example will set size of the grid squares. */
+    --tile-size: 30px;
+    --tile-row-size: 30px;
+    --tile-col-size: 30px;
+    --border-width: 2px;
+}
+
+.grid-square {
+border-style: solid;
+width: var(--tile-row-size);
+height: var(--tile-col-size);
+border-width: 0.01;
+border-color:rgba(200, 200, 200, 1);
+}
+
+.start-default{
+    background: url("../../../assets/start.png"), var(--default);
+    background-size:100% 100%; 
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+.end-default{
+    background: url("../../../assets/target.png"), var(--default);
+    background-size: 85% 85%; 
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.wall {
+    background-color: var(--wall);
+    animation-name: wall-animation;
+    animation-duration: 0.4s;
+    animation-timing-function: ease-out;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+.left-visited-false-right-visited-false {
+    background-color: var(--default);
+}
+  
+.left-visited-true-right-visited-false {
+    background-color: var(--left-visited);
+}
+
+.left-visited-false-right-visited-true {
+    background-color: var(--right-visited);
+}
+
+.left-visited-true-right-visited-true {
+    background-color: var(--both-visited);
+}
+
+.left-shortest-true-right-shortest-false {
+    background-color: var(--left-shortest);
+    animation-name: shortest-animation;
+    animation-duration: 2.0s;
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+.left-shortest-false-right-shortest-true {
+    background-color: var(--right-shortest);
+    animation-name: shortest-animation;
+    animation-duration: 2.0s;
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+.left-shortest-true-right-shortest-true {
+    background-color: var(--both-shortest);
+    animation-name: shortest-animation;
+    animation-duration: 2.0s;
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+@keyframes shortest-animation {
+    0% {
+        transform: scale(0.6);
+        border-width: 0;
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+@keyframes wall-animation {
+    0% {
+        transform: scale(1.2);
+        border-width: 0;
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}

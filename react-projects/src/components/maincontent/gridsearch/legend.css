@@ -1,0 +1,70 @@
+.legend {
+    height:60px;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    top: 2rem;
+}
+
+.legend-labels {
+    display: flex;
+    width: 60%;
+    justify-content: space-evenly;
+    height: 100%;
+}
+
+.legend-square {
+    width: var(--tile-size);
+    height: var(--tile-size);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.legend-left-visited {
+    background-color: var(--left-visited);
+    margin-right: 5px;
+}
+
+.legend-right-visited {
+    background-color: var(--right-visited);
+    margin-right: 5px;
+}
+
+.legend-both-visited {
+    background-color: var(--both-visited);
+    margin-right: 5px;
+
+}
+
+.legend-left-shortest {
+    background-color: var(--left-shortest);
+    margin-right: 5px;
+}
+
+.legend-right-shortest {
+    background-color: var(--right-shortest);
+    margin-right: 5px;
+}
+
+.legend-both-shortest {
+    background-color: var(--both-shortest);
+    margin-right: 5px;
+
+}
+
+.legend-label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.legend-wall {
+    background-color: var(--wall);
+    margin-right: 5px;
+}

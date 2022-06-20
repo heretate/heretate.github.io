@@ -1,0 +1,8 @@
+.appContainer{
+    display: flex;
+}
+
+.contentContainer{
+    flex: 6;
+}
+

@@ -1,0 +1,13 @@
+* {
+    box-sizing: border-box;
+  }
+
+  .grid-board {
+    display: grid;
+    width: 80%;
+    grid-template-columns: repeat(var(--cols), minmax(10px, 30px));
+    grid-gap: 0;
+    justify-items: center;
+    align-items: center;
+    padding-top: 35px;
+  }
