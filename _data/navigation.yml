@@ -3,7 +3,7 @@ main:
     url: /posts/
   - title: "Projects"
     url: /projects/
-    title: "React Projects"
+  - title: "React Projects"
     url: /hosted-react-projects/
   - title: "Notes"
     url: /notes/
