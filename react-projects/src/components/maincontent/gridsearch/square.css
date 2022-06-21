@@ -30,8 +30,9 @@
 border-style: solid;
 width: var(--tile-row-size);
 height: var(--tile-col-size);
-border-width: 0.01;
-border-color:rgba(200, 200, 200, 1);
+border-width: 0.01px;
+border-color:#e9ecef;
+border-style: solid;
 }
 
 .start-default{
