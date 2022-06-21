@@ -24,6 +24,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 7px;
 }
 
 .legend-left-visited {
@@ -34,11 +35,14 @@
 .legend-right-visited {
     background-color: var(--right-visited);
     margin-right: 5px;
+    color: white;
 }
 
 .legend-both-visited {
     background-color: var(--both-visited);
     margin-right: 5px;
+    color: white;
+    
 
 }
 
@@ -50,11 +54,13 @@
 .legend-right-shortest {
     background-color: var(--right-shortest);
     margin-right: 5px;
+    color: white;
 }
 
 .legend-both-shortest {
     background-color: var(--both-shortest);
     margin-right: 5px;
+    color: white;
 
 }
 

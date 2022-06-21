@@ -41,7 +41,7 @@ export default function Legend(props) {
                 <div className='legend-label'>
                     <div className='end-square'><img src={targetIcon} alt="" width='30px' height='30px' /></div>
                     <div className='grid-text'>
-                        Start Square
+                        Target Square
                     </div>
                 </div>
 

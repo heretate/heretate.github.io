@@ -10,13 +10,13 @@
     /* Square Colors:  background colors for the squares.*/
     --default: #FFFAFA;
     --node: #000000;
-    --wall: #808080;
-    --left-shortest: #FF69B4;
-    --right-shortest: #f2ea00;
-    --both-shortest: #FFAC1C;
-    --left-visited: rgb(171, 171, 241);
-    --right-visited: rgb(73, 245, 73);
-    --both-visited: #AFEEEE;
+    --wall: #565656;
+    --left-shortest: #ffedd8;
+    --right-shortest: #6f4518;
+    --both-shortest: #bc8a5f;
+    --left-visited: #a9d6e5;
+    --right-visited: #01497c;
+    --both-visited: #2c7da0;
   
     /* Numbers define values that will be used throughout the CSS.
     --tile-size: 20px for example will set size of the grid squares. */

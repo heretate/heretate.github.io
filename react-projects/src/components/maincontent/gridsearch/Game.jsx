@@ -10,6 +10,7 @@ const UPDATE_SPEED = 10;
 const SHORTEST_PATH_MARGIN = 3;
 const LATENCY_PADDING = 1000;
 
+
 const ROW_LEN = 25;
 const COL_LEN = 50;
 const HORIZONTAL_OFFSET = 7
