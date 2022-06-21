@@ -243,9 +243,6 @@ export default function Game(props) {
     */
     const animate = async(leftVisitSequence, leftShortestPath, rightVisitSequence, rightShortestPath) => {
 
-      const startSquare = [leftShortestPath[0].row, leftShortestPath[0].col]
-      const targetSquare = [leftShortestPath[leftShortestPath.length - 1].row, leftShortestPath[leftShortestPath.length - 1].col]
-
       animateAlgorithms(leftVisitSequence, rightVisitSequence, startSquare, targetSquare);
       /*
       await new Promise((resolve) => {
