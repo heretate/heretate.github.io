@@ -17,6 +17,9 @@ export default function Board(props) {
             grid[row].push(<Square
                 key={`${row}-${col}`}
                 handleClick={props.handleClick}
+                handleMouseDown={props.handleMouseDown}
+                handleMouseUp={props.handleMouseUp}
+                handleMouseMove={props.handleMouseMove}
                 {...props.grid[row][col]}>
               </Square>)
         }

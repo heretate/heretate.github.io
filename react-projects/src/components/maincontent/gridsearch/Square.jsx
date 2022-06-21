@@ -26,9 +26,14 @@ export default function Square(props) {
     }
     
     const handleMouseDown = () => {
-        props.handleMouseDown(isWall, props.row, props.col);
+        props.handleMouseDown(props.row, props.col);
     }
-
+    const handleMouseMove = () => {
+        props.handleMouseMove(props.row, props.col);
+    }
+    const handleMouseUp = () => {
+        props.handleMouseUp();
+    }
     const classes = `grid-square ${classType}`
-    return <button className={classes} id={`${props.row}-${props.col}`} onClick={handleClick} />
+    return <button className={classes} id={`${props.row}-${props.col}`} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp} onMouseMove={handleMouseMove}/>
 }

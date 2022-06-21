@@ -224,6 +224,7 @@ export default function Game(props) {
   const [rowLength, setRowLength] = useState(ROW_LEN);
   const [grid, setGrid] = useState(initializeGrid(rowLength, colLength, startSquare, targetSquare));
   const [isRun, setIsRun] = useState(false);
+  const [wallSelected, setWallSelected] = useState(0); /* 0 - Not selected, 1 - Selected add wall, 2 - Selected remove wall*/
   const [leftAlgorithm, setLeftAlgorithm] = useState("none");
   const [rightAlgorithm, setRightAlgorithm] = useState("none");
   
@@ -316,6 +317,44 @@ export default function Game(props) {
       updateSquare(row, col, newSquareState);
     }
 
+    const setWall = (row, col) => {
+      const squareState = grid[row][col];
+      if (squareState.isWall) {
+        setWallSelected(2);
+        
+      }
+      else {
+        setWallSelected(1);
+      }     
+
+    }
+
+    const mouseMove = (row, col) => {
+      const squareState = grid[row][col];
+      if (wallSelected === 1) {
+        if (!squareState.isWall) {
+          const newSquareState = {
+            ...squareState,
+            isWall: !squareState.isWall,
+          }
+          updateSquare(row, col, newSquareState);
+        }
+      }
+      else if (wallSelected === 2) {
+        if (squareState.isWall) {
+          const newSquareState = {
+            ...squareState,
+            isWall: !squareState.isWall,
+          }
+          updateSquare(row, col, newSquareState);
+        }
+      }
+    }
+
+    const resetWallSelected = () => {
+      setWallSelected(0);
+    }
+
     return (
       <div className="game">
         <NavBar 
@@ -328,7 +367,7 @@ export default function Game(props) {
         clickSoftReset={clickSoftReset}
         />
         <Legend/>
-        <Board grid={grid} rowLength={rowLength} colLength={colLength} handleClick={clickWall}/>
+        <Board grid={grid} rowLength={rowLength} colLength={colLength} handleClick={clickWall} handleMouseDown={setWall} handleMouseUp={resetWallSelected} handleMouseMove={mouseMove}/>
       </div>
     )
   }
