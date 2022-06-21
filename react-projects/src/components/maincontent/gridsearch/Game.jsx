@@ -270,7 +270,7 @@ export default function Game(props) {
 
     const clickGo = () => {
       if (isRun) {
-        const newGrid = getNewGrid(grid, false); 
+        const newGrid = getNewGrid(grid, true, startSquare, targetSquare); 
         setGrid(newGrid);  
       }
       setIsRun(true);
