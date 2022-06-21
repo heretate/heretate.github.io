@@ -7,3 +7,9 @@
     width: 100%;
     margin-bottom: 5px;
 }
+
+:root {
+    --tile-size: 30px;
+    --tile-row-size: 30px;
+    --tile-col-size: 30px;
+}

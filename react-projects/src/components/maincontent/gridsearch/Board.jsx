@@ -2,10 +2,6 @@ import Square from "./Square";
 
 import './board.css'
 
-
-
-
-
 export default function Board(props) {
 
     // Needs a grid spec to convert into full board

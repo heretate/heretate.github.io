@@ -5,38 +5,44 @@ import Legend from "./Legend";
 import getAlgorithm from "../../../algorithms/index.js"
 
 import "./game.css"
+import { useEffect } from "react";
 
 const UPDATE_SPEED = 10;
 const SHORTEST_PATH_MARGIN = 3;
 const LATENCY_PADDING = 1000;
 
-
 const ROW_LEN = 25;
-const COL_LEN = 50;
+
+
 const HORIZONTAL_OFFSET = 7
 
-let root = document.documentElement;
-root.style.setProperty('--cols', COL_LEN);
+const getGridColumn = (colLength) => {
+  let root = document.documentElement;
+  const boxSize = parseInt(window.getComputedStyle(document.documentElement).getPropertyValue('--tile-size'));
+  let flooredLength = Math.floor(colLength / boxSize);
+  flooredLength = Math.min(50, Math.max(flooredLength, 30));
+  if (!(flooredLength % 2 === 0)) {
 
-const START_SQUARE_ROW = Math.floor(ROW_LEN / 2);
-const START_SQUARE_COL = HORIZONTAL_OFFSET - 1;
-const FINISH_SQUARE_ROW = Math.floor(ROW_LEN / 2);
-const FINISH_SQUARE_COL = COL_LEN - HORIZONTAL_OFFSET;
+    flooredLength -= 1;
+  }
+  root.style.setProperty('--cols', flooredLength);
+  return flooredLength;
+  
+}
 
-
-const initializeGrid = () => {
+const initializeGrid = (rowLength, colLength, startSquare, targetSquare) => {
   const grid = [];
-  for (let row = 0; row < ROW_LEN; row++) {
+  for (let row = 0; row < rowLength; row++) {
     const currentRow = [];
-    for (let col = 0; col < COL_LEN; col++) {
-      currentRow.push(createSquare(row, col));
+    for (let col = 0; col < colLength; col++) {
+      currentRow.push(createSquare(row, col, startSquare, targetSquare));
     }
     grid.push(currentRow);
   }
   return grid;
 }
 
-const createSquare = (row, col) => {
+const createSquare = (row, col, startSquare, targetSquare) => {
   /*
   Initializes the dictionary that describes the square. prevNode and distance together keep track of shortest path to node.
   */
@@ -44,8 +50,8 @@ const createSquare = (row, col) => {
     row: row,
     col: col,
     squareId: `${row}-${col}`,
-    isStart: row === START_SQUARE_ROW && col === START_SQUARE_COL,
-    isEnd: row === FINISH_SQUARE_ROW && col === FINISH_SQUARE_COL,
+    isStart: row === startSquare[0] && col === startSquare[1],
+    isEnd: row === targetSquare[0] && col === targetSquare[1],
     isWall: false,
     leftVisited: false,
     rightVisited: false,
@@ -53,7 +59,7 @@ const createSquare = (row, col) => {
   };
 };
 
-const animateAlgorithms = (leftSearchSequence, rightSearchSequence) => {
+const animateAlgorithms = (leftSearchSequence, rightSearchSequence, startSquare, targetSquare) => {
   const visitedSquares = new Set();
   let i = 0;
   let j = 0;
@@ -97,10 +103,10 @@ const animateAlgorithms = (leftSearchSequence, rightSearchSequence) => {
 
 
 
-    if ((square.row === START_SQUARE_ROW) && (square.col === START_SQUARE_COL)) {
+    if ((square.row === startSquare[0]) && (square.col === startSquare[1])) {
       animateSquare("start-default", visitedSquares, square, i, j , isLeft);
     }
-    else if ((square.row === FINISH_SQUARE_ROW) && (square.col === FINISH_SQUARE_COL)) {
+    else if ((square.row === targetSquare[0]) && (square.col === targetSquare[1])) {
       animateSquare("end-default", visitedSquares, square, i, j , isLeft);
     }
     else {
@@ -119,9 +125,9 @@ const animateAlgorithms = (leftSearchSequence, rightSearchSequence) => {
 }
 
 
-const getNewGrid = (grid, keepWalls) => {
+const getNewGrid = (grid, keepWalls, startSquare, targetSquare) => {
   const oldGrid = structuredClone(grid);
-  const newGrid = initializeGrid();
+  const newGrid = initializeGrid(grid.length, grid[0].length, startSquare, targetSquare);
   for (let row = 0; row < newGrid.length; row ++) {
     for (let col = 0; col < newGrid[0].length; col ++) {
       if (newGrid[row][col].isEnd) {
@@ -145,7 +151,7 @@ const getNewGrid = (grid, keepWalls) => {
   return newGrid;
 }
 
-const animateShortestPaths = (leftPathSequence, rightPathSequence, waitTime) => {
+const animateShortestPaths = (leftPathSequence, rightPathSequence, startSquare, targetSquare, waitTime) => {
   const visitedSquares = new Set();
   let i = 0;
   let j = 0;
@@ -190,10 +196,10 @@ const animateShortestPaths = (leftPathSequence, rightPathSequence, waitTime) => 
 
 
 
-    if ((square.row === START_SQUARE_ROW) && (square.col === START_SQUARE_COL)) {
+    if ((square.row === startSquare[0]) && (square.col === startSquare[1])) {
       animateSquare("start-default", visitedSquares, square, i, j , isLeft);
     }
-    else if ((square.row === FINISH_SQUARE_ROW) && (square.col === FINISH_SQUARE_COL)) {
+    else if ((square.row === targetSquare[0]) && (square.col === targetSquare[1])) {
       animateSquare("end-default", visitedSquares, square, i, j , isLeft);
     }
     else {
@@ -210,12 +216,23 @@ const animateShortestPaths = (leftPathSequence, rightPathSequence, waitTime) => 
   }
 }
 
-export default function Game() {
+export default function Game(props) {
 
-    const [grid, setGrid] = useState(initializeGrid());
-    const [isRun, setIsRun] = useState(false);
-    const [leftAlgorithm, setLeftAlgorithm] = useState("none");
-    const [rightAlgorithm, setRightAlgorithm] = useState("none");
+  const [colLength, setColLength] = useState(getGridColumn(props.col));
+  const [startSquare, setStartSquare] = useState([Math.floor(ROW_LEN/ 2), HORIZONTAL_OFFSET - 1]);
+  const [targetSquare, setTargetSquare] = useState([Math.floor(ROW_LEN/ 2), colLength - HORIZONTAL_OFFSET]);
+  const [rowLength, setRowLength] = useState(ROW_LEN);
+  const [grid, setGrid] = useState(initializeGrid(rowLength, colLength, startSquare, targetSquare));
+  const [isRun, setIsRun] = useState(false);
+  const [leftAlgorithm, setLeftAlgorithm] = useState("none");
+  const [rightAlgorithm, setRightAlgorithm] = useState("none");
+  
+  useEffect(() => {
+    setColLength(getGridColumn(props.col));
+    setStartSquare([Math.floor(ROW_LEN/ 2), HORIZONTAL_OFFSET - 1]);
+    setTargetSquare([Math.floor(ROW_LEN/ 2), colLength - HORIZONTAL_OFFSET]);
+    setGrid(initializeGrid(ROW_LEN, colLength, [Math.floor(ROW_LEN/ 2), HORIZONTAL_OFFSET - 1], [Math.floor(ROW_LEN/ 2), colLength - HORIZONTAL_OFFSET]));
+  }, [props.col, colLength])
 
     /*
     Used async/await to force timeouts to in practice behave synchronously.
@@ -224,7 +241,11 @@ export default function Game() {
     For now, will omit updating grid...
     */
     const animate = async(leftVisitSequence, leftShortestPath, rightVisitSequence, rightShortestPath) => {
-      animateAlgorithms(leftVisitSequence, rightVisitSequence);
+
+      const startSquare = [leftShortestPath[0].row, leftShortestPath[0].col]
+      const targetSquare = [leftShortestPath[leftShortestPath.length - 1].row, leftShortestPath[leftShortestPath.length - 1].col]
+
+      animateAlgorithms(leftVisitSequence, rightVisitSequence, startSquare, targetSquare);
       /*
       await new Promise((resolve) => {
         setTimeout(() => {
@@ -233,7 +254,7 @@ export default function Game() {
         }, (leftVisitSequence.length + rightVisitSequence.length) * UPDATE_SPEED + 50);
       });
       */
-      animateShortestPaths(leftShortestPath, rightShortestPath, (leftVisitSequence.length + rightVisitSequence.length) * UPDATE_SPEED + LATENCY_PADDING / 2);
+      animateShortestPaths(leftShortestPath, rightShortestPath, startSquare, targetSquare, (leftVisitSequence.length + rightVisitSequence.length) * UPDATE_SPEED + LATENCY_PADDING / 2);
     }
 
 
@@ -257,15 +278,15 @@ export default function Game() {
       setIsRun(true);
       const leftAlgoFn = getAlgorithm(leftAlgorithm);
       const rightAlgoFn = getAlgorithm(rightAlgorithm);
-      const [leftVisitSequence, leftShortestPath] = leftAlgoFn(grid, [START_SQUARE_ROW, START_SQUARE_COL], [FINISH_SQUARE_ROW, FINISH_SQUARE_COL]);
-      const [rightVisitSequence, rightShortestPath] = rightAlgoFn(grid, [START_SQUARE_ROW, START_SQUARE_COL], [FINISH_SQUARE_ROW, FINISH_SQUARE_COL]);
+      const [leftVisitSequence, leftShortestPath] = leftAlgoFn(grid, startSquare, targetSquare);
+      const [rightVisitSequence, rightShortestPath] = rightAlgoFn(grid, startSquare, targetSquare);
       animate(leftVisitSequence, leftShortestPath, rightVisitSequence, rightShortestPath);
       return (leftVisitSequence.length + rightVisitSequence.length) * UPDATE_SPEED + (leftShortestPath.length + rightShortestPath.length) * (UPDATE_SPEED + SHORTEST_PATH_MARGIN) + LATENCY_PADDING * 2;
     }
 
 
     const clickReset = () => {
-      const newGrid = getNewGrid(grid, false); 
+      const newGrid = getNewGrid(grid, false, startSquare, targetSquare); 
       setGrid(newGrid);    
       setIsRun(false);
     }
@@ -274,7 +295,7 @@ export default function Game() {
     Soft reset does not clear off walls
     */
     const clickSoftReset = () => {
-      const newGrid = getNewGrid(grid, true);   
+      const newGrid = getNewGrid(grid, true, startSquare, targetSquare);   
       setGrid(newGrid);    
       setIsRun(false);
     }
@@ -307,7 +328,7 @@ export default function Game() {
         clickSoftReset={clickSoftReset}
         />
         <Legend/>
-        <Board grid={grid} rowLength={ROW_LEN} colLength={COL_LEN} handleClick={clickWall}/>
+        <Board grid={grid} rowLength={rowLength} colLength={colLength} handleClick={clickWall}/>
       </div>
     )
   }
