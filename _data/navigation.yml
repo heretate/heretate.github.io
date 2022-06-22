@@ -7,7 +7,5 @@ main:
     url: /notes/
   - title: "Resume"
     url: /resume/
-  - title: "Project Platform"
-    url: /hosted-react-projects/
   - title: "About"
     url: /about/
