@@ -4,7 +4,6 @@ permalink: /projects/
 author_profile: true
 ---
 
-
 ## Grid Search Comparison Visualizer - React
 
 [<img alt="[https://heretate.github.io/hosted-react-projects/]" width="700px" height="400px" src="../assets/images/grid-search-comparison.png" />](https://heretate.github.io/hosted-react-projects/)

@@ -8,7 +8,7 @@ tags:
   - react
 ---
 
-It's been a while since the birth of this site...did a lot of tinkering around but I thought I'd provide a mini-showcase of some of my more recent efforts. Added a link to two projects that I've worked on. In addition, I've also incorporated the react project into the website. The goal will be for it to turn into a more holistic platform for all my react projects :).
+It's been a while since I started this site...did a lot of tinkering around but I thought I'd provide a mini-showcase of some of my more recent efforts. Added a link to two projects that I've worked on. In addition, I've also incorporated the react project into the website. The goal will be for it to turn into a more holistic platform for all my react projects :).
 
 ```javascript
 const howDoIGetThisThingWorking = (thing) => {
