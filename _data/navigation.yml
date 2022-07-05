@@ -7,6 +7,6 @@ main:
   - title: "Posts"
     url: /posts/
   - title: "Resume"
-    url: /resume/
+    url: /../assets/files/Eric_Huan_Resume.pdf
   - title: "About"
     url: /about/
